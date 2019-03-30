@@ -9,6 +9,13 @@ import io.github.mexassi.player.Player;
 import io.github.mexassi.rule.Rule;
 
 public class StandardGameRule implements Rule<StandardGame> {
+
+    private final FourtyRule fourtyRule;
+
+    public StandardGameRule() {
+        fourtyRule = new FourtyRule();
+    }
+
     @Override
     public void apply(Player player, StandardGame standardGame) {
         List<Point> playerPoints = standardGame.getAchievedBy(player);
@@ -26,6 +33,7 @@ public class StandardGameRule implements Rule<StandardGame> {
                 playerPoints.add(new Point(PointType.FOURTY));
                 break;
             case FOURTY:
+                fourtyRule.apply(player, standardGame);
                 break;
             case ADVANTAGE:
                 playerPoints.add(new Point(PointType.WIN));

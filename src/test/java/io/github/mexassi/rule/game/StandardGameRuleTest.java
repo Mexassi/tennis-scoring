@@ -1,6 +1,7 @@
 package io.github.mexassi.rule.game;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.internal.util.reflection.FieldSetter;
 
 import io.github.mexassi.achievable.StandardGame;
 import io.github.mexassi.achievable.point.Point;
@@ -28,13 +30,22 @@ class StandardGameRuleTest {
     @Mock
     private StandardGame standardGame;
 
+    @Mock
+    private FourtyRule fourtyRule;
+
     @BeforeEach
-    void setUp() {
+    void setUp() throws NoSuchFieldException {
         MockitoAnnotations.initMocks(this);
 
         standardGameRule = new StandardGameRule();
 
         when(player.getSide()).thenReturn(PlayerSide.ONE);
+
+        FieldSetter.setField(
+                standardGameRule,
+                standardGameRule.getClass().getDeclaredField("fourtyRule"),
+                fourtyRule
+        );
     }
 
     @Test
@@ -93,5 +104,14 @@ class StandardGameRuleTest {
         assertEquals(PointType.WIN, last.getType());
     }
 
+    @Test
+    @DisplayName("It should apply the forty rule when the last point is 40")
+    void apply_fourtyRule() {
+        List<Point> points = new ArrayList<Point>(){{add(new Point(PointType.FOURTY));}};
+        when(standardGame.getAchievedBy(player)).thenReturn(points);
 
+        standardGameRule.apply(player, standardGame);
+
+        verify(fourtyRule).apply(player, standardGame);
+    }
 }
