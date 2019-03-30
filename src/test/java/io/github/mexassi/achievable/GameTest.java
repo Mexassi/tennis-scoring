@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import io.github.mexassi.achievable.Game;
 import io.github.mexassi.achievable.point.Point;
 import io.github.mexassi.achievable.point.PointType;
 import io.github.mexassi.achievable.score.CurrentGameScore;

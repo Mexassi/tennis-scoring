@@ -3,7 +3,6 @@ package io.github.mexassi.achievable;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.mexassi.achievable.Achievable;
 import io.github.mexassi.achievable.point.Point;
 import io.github.mexassi.achievable.point.PointType;
 import io.github.mexassi.achievable.score.CurrentGameScore;
