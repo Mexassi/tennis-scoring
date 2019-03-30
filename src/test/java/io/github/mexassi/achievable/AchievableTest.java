@@ -35,6 +35,8 @@ class AchievableTest {
         playerTwoAchievements = new ArrayList<>();
 
         when(achievable.getAchievedBy(player)).thenCallRealMethod();
+        when(achievable.getOpponentAchievements(player)).thenCallRealMethod();
+
         when(achievable.getPlayerOneAchievements()).thenReturn(playerOneAchievements);
         when(achievable.getPlayerTwoAchievements()).thenReturn(playerTwoAchievements);
     }
@@ -57,5 +59,25 @@ class AchievableTest {
         List<Object> achievements = achievable.getAchievedBy(player);
         assertNotNull(achievements);
         assertEquals(playerTwoAchievements, achievements);
+    }
+
+    @Test
+    @DisplayName("It should return player's two achievements")
+    void getOpponentAchievements_forOne() {
+        when(player.getSide()).thenReturn(PlayerSide.ONE);
+
+        List<Object> achievements = achievable.getOpponentAchievements(player);
+        assertNotNull(achievements);
+        assertEquals(playerTwoAchievements, achievements);
+    }
+
+    @Test
+    @DisplayName("It should return player's one achievements")
+    void getOpponentAchievements_forTwo() {
+        when(player.getSide()).thenReturn(PlayerSide.TWO);
+
+        List<Object> achievements = achievable.getOpponentAchievements(player);
+        assertNotNull(achievements);
+        assertEquals(playerOneAchievements, achievements);
     }
 }

@@ -15,6 +15,7 @@ public abstract class Achievable<T> {
 
     public abstract boolean isFinished();
 
+    @SuppressWarnings("Duplicates")
     public List<T> getAchievedBy(Player player) {
         final PlayerSide side = player.getSide();
 
@@ -22,6 +23,20 @@ public abstract class Achievable<T> {
             case ONE:
                 return getPlayerOneAchievements();
             case TWO:
+                return getPlayerTwoAchievements();
+            default:
+                throw new UnsupportedOperationException(String.format("Unsupported player side %s", side));
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public List<T> getOpponentAchievements(Player player) {
+        final PlayerSide side = player.getSide();
+
+        switch (side) {
+            case TWO:
+                return getPlayerOneAchievements();
+            case ONE:
                 return getPlayerTwoAchievements();
             default:
                 throw new UnsupportedOperationException(String.format("Unsupported player side %s", side));
