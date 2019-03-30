@@ -1,4 +1,4 @@
-package io.github.mexassi.achievable.point;
+package io.github.mexassi.achievable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -9,12 +9,16 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import io.github.mexassi.achievable.Game;
+import io.github.mexassi.achievable.point.Point;
+import io.github.mexassi.achievable.point.PointType;
 import io.github.mexassi.achievable.score.CurrentGameScore;
 
 class GameTest {
@@ -66,7 +70,7 @@ class GameTest {
     void getCurrentGameScore() {
         CurrentGameScore currentGameScore = mockedGame.getCurrentGameScore();
         assertNotNull(currentGameScore);
-        assertEquals(PointType.LOVE, currentGameScore.getCurrentPlayerOnePoint().getType());
+        Assertions.assertEquals(PointType.LOVE, currentGameScore.getCurrentPlayerOnePoint().getType());
         assertEquals(PointType.LOVE, currentGameScore.getCurrentPlayerTwoPoint().getType());
     }
 
