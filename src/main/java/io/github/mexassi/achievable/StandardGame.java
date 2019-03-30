@@ -1,19 +1,20 @@
 package io.github.mexassi.achievable;
 
-import java.util.List;
-
-import io.github.mexassi.achievable.point.Point;
-import io.github.mexassi.achievable.point.PointType;
 import io.github.mexassi.player.Player;
+import io.github.mexassi.rule.Rule;
+import io.github.mexassi.rule.game.StandardGameRule;
 
 public class StandardGame extends Game {
 
+    private final Rule<StandardGame> standardGameRule;
+
+    public StandardGame() {
+        standardGameRule = new StandardGameRule();
+    }
+
     @Override
     public void pointFor(Player player) {
-        List<Point> playerPoints = getAchievedBy(player);
-        if (playerPoints.isEmpty()) {
-            playerPoints.add(new Point(PointType.FIFTEEN));
-        }
+        standardGameRule.apply(player, this);
     }
 
     @Override
