@@ -7,6 +7,8 @@ import io.github.mexassi.player.PlayerSide;
 
 public abstract class Achievable<T> {
 
+    public abstract void pointFor(Player player);
+
     public abstract List<T> getPlayerOneAchievements();
 
     public abstract List<T> getPlayerTwoAchievements();

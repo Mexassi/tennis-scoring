@@ -19,6 +19,7 @@ import org.mockito.MockitoAnnotations;
 import io.github.mexassi.achievable.point.Point;
 import io.github.mexassi.achievable.point.PointType;
 import io.github.mexassi.achievable.score.CurrentGameScore;
+import io.github.mexassi.player.Player;
 
 class GameTest {
 
@@ -35,6 +36,11 @@ class GameTest {
             @Override
             public String getScore() {
                 return null;
+            }
+
+            @Override
+            public void pointFor(Player player) {
+
             }
 
             @Override
