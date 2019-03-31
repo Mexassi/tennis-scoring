@@ -46,8 +46,11 @@ public class TennisSet extends Achievable<Game> implements Observable {
 
     @Override
     public String getScore() {
-        return null;
-    }
+        String currentGameScore = (currentGame.getScore() != null ? ", " + currentGame.getScore() : "");
+        return String.format("%s-%s%s",
+                playerOneGames.size(),
+                playerTwoGames.size(),
+                currentGameScore);    }
 
     @Override
     public boolean isFinished() {

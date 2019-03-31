@@ -1,5 +1,7 @@
 package io.github.mexassi.achievable;
 
+import io.github.mexassi.achievable.point.PointType;
+import io.github.mexassi.achievable.score.CurrentGameScore;
 import io.github.mexassi.player.Player;
 import io.github.mexassi.rule.Rule;
 import io.github.mexassi.rule.game.StandardGameRule;
@@ -19,6 +21,31 @@ public class StandardGame extends Game {
 
     @Override
     public String getScore() {
-        return null;
+        CurrentGameScore gameScore = getCurrentGameScore();
+
+        PointType onePoint = gameScore.getCurrentPlayerOnePoint().getType();
+        PointType twoPoint = gameScore.getCurrentPlayerTwoPoint().getType();
+
+        if (onePoint.equals(PointType.FOURTY) && twoPoint.equals(PointType.FOURTY)) {
+            return "Deuce";
+        }
+
+        if (onePoint.equals(PointType.WIN) || twoPoint.equals(PointType.WIN)) {
+            return "";
+        }
+
+        if (onePoint.equals(PointType.LOVE) && twoPoint.equals(PointType.LOVE)) {
+            return "";
+        }
+
+        if (onePoint.equals(PointType.ADVANTAGE)) {
+            return "Advantage player 1";
+        }
+
+        if (twoPoint.equals(PointType.ADVANTAGE)) {
+            return "Advantage player 2";
+        }
+
+        return String.format("%s-%s", onePoint.getLabel(), twoPoint.getLabel());
     }
 }
