@@ -27,6 +27,12 @@ public abstract class Game extends Achievable<Point> {
         return playerTwoPoints;
     }
 
+    /**
+     * Get the latest points scored by both player side in the game. When no points are found a
+     * {@link PointType#LOVE} is returned.
+     *
+     * @return an object representation of the current game score
+     */
     public CurrentGameScore getCurrentGameScore() {
         List<Point> onePoints = getPlayerOneAchievements();
         List<Point> twoPoints = getPlayerTwoAchievements();

@@ -16,6 +16,13 @@ public class StandardGameRule implements Rule<StandardGame> {
         fourtyRule = new FourtyRule();
     }
 
+    /**
+     * Assign a point to a player. The implementation changes when 40 point where scored and the
+     * {@link FourtyRule} is applied.
+     *
+     * @param player that scored the point
+     * @param standardGame the game the player scored the point in
+     */
     @Override
     public void apply(Player player, StandardGame standardGame) {
         List<Point> playerPoints = standardGame.getAchievedBy(player);

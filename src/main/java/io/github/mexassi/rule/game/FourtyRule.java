@@ -16,6 +16,12 @@ public class FourtyRule implements Rule<StandardGame> {
         possibleDeuceRule = new PossibleDeuceRule();
     }
 
+    /**
+     * Assing a winning point if the opponent has no points, otherwise handle the {@link PossibleDeuceRule}
+     *
+     * @param player the player that scored the point
+     * @param standardGame the game the player scored the point in
+     */
     @Override
     public void apply(Player player, StandardGame standardGame) {
         List<Point> playerPoints = standardGame.getAchievedBy(player);

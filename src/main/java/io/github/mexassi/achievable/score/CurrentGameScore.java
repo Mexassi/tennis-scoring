@@ -3,7 +3,12 @@ package io.github.mexassi.achievable.score;
 import java.util.Objects;
 
 import io.github.mexassi.achievable.point.Point;
+import io.github.mexassi.player.PlayerSide;
 
+/**
+ * This class acts as an object holder containing the latest scored {@link Point}
+ * for each {@link PlayerSide}
+ */
 public class CurrentGameScore {
 
     private Point currentPlayerOnePoint;

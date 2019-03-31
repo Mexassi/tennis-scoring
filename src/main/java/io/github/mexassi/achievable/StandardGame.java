@@ -14,6 +14,11 @@ public class StandardGame extends Game {
         standardGameRule = new StandardGameRule();
     }
 
+    /**
+     * Assign a point for a player. Delegate the implementation to {@link StandardGameRule}
+     *
+     * @param player the player to assign the point for
+     */
     @Override
     public void pointFor(Player player) {
         standardGameRule.apply(player, this);

@@ -17,7 +17,6 @@ import org.mockito.internal.util.reflection.FieldSetter;
 
 import io.github.mexassi.player.Player;
 import io.github.mexassi.player.PlayerSide;
-import io.github.mexassi.rule.Rule;
 
 class TennisSetTest {
 
@@ -25,9 +24,6 @@ class TennisSetTest {
 
     @Mock
     private Game currentGame;
-
-    @Mock
-    private Rule<TennisSet> nextGameRule;
 
     @Mock
     private Player player;
@@ -50,12 +46,6 @@ class TennisSetTest {
                 currentGame
         );
 
-        FieldSetter.setField(
-                tennisSet,
-                tennisSet.getClass().getDeclaredField("nextGameRule"),
-                nextGameRule
-        );
-
         when(player.getSide()).thenReturn(PlayerSide.ONE);
     }
 
@@ -67,8 +57,6 @@ class TennisSetTest {
         tennisSet.pointFor(player);
 
         verify(currentGame).pointFor(player);
-        verify(currentGame).isFinished();
-        verify(nextGameRule).apply(player, tennisSet);
     }
 
     @Test
@@ -79,8 +67,6 @@ class TennisSetTest {
         tennisSet.pointFor(player);
 
         verify(currentGame).pointFor(player);
-        verify(currentGame).isFinished();
-        verify(nextGameRule).apply(player, tennisSet);
 
         assertEquals(1, tennisSet.getAchievedBy(player).size());
     }

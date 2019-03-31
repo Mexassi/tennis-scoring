@@ -3,23 +3,18 @@ package io.github.mexassi.achievable;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.mexassi.observable.Observable;
 import io.github.mexassi.player.Player;
-import io.github.mexassi.rule.Rule;
-import io.github.mexassi.rule.set.NextGameRule;
 
-public class TennisSet extends Achievable<Game> implements Observable {
+public class TennisSet extends Achievable<Game> {
 
     private final List<Game> playerOneGames;
     private final List<Game> playerTwoGames;
     private Game currentGame;
-    private Rule<TennisSet> nextGameRule;
 
     public TennisSet() {
         playerOneGames = new ArrayList<>();
         playerTwoGames = new ArrayList<>();
         currentGame = new StandardGame();
-        nextGameRule = new NextGameRule();
     }
 
 
@@ -31,7 +26,9 @@ public class TennisSet extends Achievable<Game> implements Observable {
             getAchievedBy(player).add(currentGame);
         }
 
-        nextGameRule.apply(player, this);
+        if (this.isGameFinished()) {
+            updateGame();
+        }
     }
 
     @Override
@@ -64,8 +61,7 @@ public class TennisSet extends Achievable<Game> implements Observable {
         return (oneWon || twoWon || wonAtTieBreak);
     }
 
-    @Override
-    public void update() {
+    private void updateGame() {
         List<Game> playerOneGames = getPlayerOneAchievements();
         List<Game> playerTwoGames = getPlayerTwoAchievements();
 

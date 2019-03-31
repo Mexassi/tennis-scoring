@@ -9,6 +9,14 @@ import io.github.mexassi.player.Player;
 import io.github.mexassi.rule.Rule;
 
 public class TwoPointsAdvantageRule implements Rule<TieBreakGame> {
+
+    /**
+     * Assign a winning point when the player has a score that is equal or greater than 7 and has
+     * at least 2 or more points advantage over the opponent.
+     *
+     * @param player that scored the point
+     * @param tieBreakGame the game the player scored the point in
+     */
     @Override
     public void apply(Player player, TieBreakGame tieBreakGame) {
         List<Point> playerPoints = tieBreakGame.getAchievedBy(player);

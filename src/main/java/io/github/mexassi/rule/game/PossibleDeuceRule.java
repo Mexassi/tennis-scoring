@@ -9,6 +9,14 @@ import io.github.mexassi.player.Player;
 import io.github.mexassi.rule.Rule;
 
 public class PossibleDeuceRule implements Rule<StandardGame> {
+
+    /**
+     * Adjust the score applying the deuce rule when the opponent has either {@link PointType#FOURTY} or
+     * {@link PointType#ADVANTAGE}. In all other cases a winning point is awarded to the current player.
+     *
+     * @param player that scored the point
+     * @param standardGame the game the player scored the point in
+     */
     @Override
     public void apply(Player player, StandardGame standardGame) {
         List<Point> playerPoints = standardGame.getAchievedBy(player);
