@@ -1,9 +1,12 @@
 package io.github.mexassi.achievable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,6 +31,12 @@ class TennisSetTest {
 
     @Mock
     private Player player;
+
+    @Mock
+    List<Game> playerOneGames;
+
+    @Mock
+    List<Game> playerTwoGames;
 
     @BeforeEach
     void setUp() throws NoSuchFieldException {
@@ -87,4 +96,37 @@ class TennisSetTest {
         verify(currentGame).isFinished();
     }
 
+    @Test
+    void isFinished() throws NoSuchFieldException {
+        FieldSetter.setField(
+                tennisSet,
+                tennisSet.getClass().getDeclaredField("playerOneGames"),
+                playerOneGames
+        );
+        FieldSetter.setField(
+                tennisSet,
+                tennisSet.getClass().getDeclaredField("playerTwoGames"),
+                playerTwoGames
+        );
+
+        when(playerOneGames.size()).thenReturn(0);
+        when(playerTwoGames.size()).thenReturn(0);
+
+        assertFalse(tennisSet.isFinished());
+
+        when(playerOneGames.size()).thenReturn(6);
+        when(playerTwoGames.size()).thenReturn(5);
+
+        assertFalse(tennisSet.isFinished());
+
+        when(playerOneGames.size()).thenReturn(6);
+        when(playerTwoGames.size()).thenReturn(7);
+
+        assertTrue(tennisSet.isFinished());
+
+        when(playerOneGames.size()).thenReturn(6);
+        when(playerTwoGames.size()).thenReturn(4);
+
+        assertTrue(tennisSet.isFinished());
+    }
 }
